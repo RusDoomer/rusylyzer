@@ -24,8 +24,9 @@ pub static I_TO_COL: [usize; 30] = [
 pub struct PosPair(pub usize, pub usize);
 
 const AFFECTS_SCISSOR: [bool; 30] = [
-    true, true, true, true, true, true, true, true, true, true, true, true, false, false, false,
-    false, false, false, true, true, true, true, true, false, true, false, false, true, true, true,
+    true, true, true, true, true, true, true, true, true, true,
+    false, false, false, false, false, false, false, false, false, false,
+    true, true, true, true, true, true, true, true, true, true,
 ];
 
 const AFFECTS_LSB: [bool; 30] = [
@@ -79,7 +80,7 @@ const fn get_possible_swaps() -> [PosPair; 435] {
     res
 }
 
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Default)]
 pub struct ConvertU8 {
     from: Vec<char>,
     to: FxHashMap<char, u8>,
@@ -411,46 +412,39 @@ pub const fn get_lsb_indices() -> [PosPair; 16] {
     res
 }
 
-pub const fn get_scissor_indices() -> [PosPair; 17] {
-    let mut res = [PosPair::default(); 17];
+pub const fn get_scissor_indices() -> [PosPair; 28] {
+    let mut res = [PosPair::default(); 28];
 
-    //these add normal stretching between ajacent columns that stretch between 2 rows except for
-    //qwerty mi and ce (assuming c is typed with index)
-    // let mut i = 0;
-    // let cols = [0, 1, 2, 6, 7, 8];
-
-    // while i < cols.len() {
-    // 	let col_nr = cols[i];
-    // 	if col_nr != 2 {
-    // 		res[i] = PosPair(col_nr, col_nr+21);
-    // 	}
-    // 	if col_nr != 6 {
-    // 		res[i+6] = PosPair(col_nr+1, col_nr+20);
-    // 	}
-    // 	i += 1;
-    // }
-
-    res[0] = PosPair(0, 21);
-    res[1] = PosPair(1, 22);
-    res[2] = PosPair(6, 27);
-    res[3] = PosPair(7, 28);
-    res[4] = PosPair(8, 29);
-    res[5] = PosPair(1, 20);
-    res[6] = PosPair(2, 21);
-    res[7] = PosPair(3, 22);
-    res[8] = PosPair(8, 27);
-    res[9] = PosPair(9, 28);
-
-    //pinky->ring 1u stretches
-    res[10] = PosPair(0, 11);
-    res[11] = PosPair(9, 18);
-    res[12] = PosPair(10, 21);
-    res[13] = PosPair(19, 28);
-
-    //inner index scissors (no qwerty `ni` because of stagger)
-    res[14] = PosPair(2, 24);
-    res[15] = PosPair(22, 4);
-    res[16] = PosPair(5, 27);
+    //Left Hand
+    res[0]  = PosPair(0, 21); //Top Pinky Lower Ring
+    res[1]  = PosPair(0, 22); //Top Pinky Lower Middle
+    res[2]  = PosPair(1, 20); //Top Ring Lower Pinky
+    res[3]  = PosPair(1, 22); //Top Ring Lower Middle
+    res[4]  = PosPair(1, 23); //Top Ring Lower Index
+    res[5]  = PosPair(1, 24); //Top Ring Lower Stretch
+    res[6]  = PosPair(2, 20); //Top Middle Lower Pinky
+    res[7]  = PosPair(2, 21); //Top Middle Lower Ring
+    res[8]  = PosPair(2, 23); //Top Middle Lower Index
+    res[9]  = PosPair(2, 24); //Top Middle Lower Stretch
+    res[10] = PosPair(3, 21); //Top Index Lower Ring
+    res[11] = PosPair(3, 22); //Top Index Lower Middle
+    res[12] = PosPair(4, 21); //Top Strech Lower Ring
+    res[13] = PosPair(4, 22); //Top Stretch Lower Middle
+    //Right Hand
+    res[14] = PosPair(9, 28); //Top Pinky Lower Ring
+    res[15] = PosPair(9, 27); //Top Pinky Lower Middle
+    res[16] = PosPair(8, 29); //Top Ring Lower Pinky
+    res[17] = PosPair(8, 27); //Top Ring Lower Middle
+    res[18] = PosPair(8, 26); //Top Ring Lower Index
+    res[19] = PosPair(8, 25); //Top Ring Lower Stretch
+    res[20] = PosPair(7, 29); //Top Middle Lower Pinky
+    res[21] = PosPair(7, 28); //Top Middle Lower Ring
+    res[22] = PosPair(7, 26); //Top Middle Lower Index
+    res[23] = PosPair(7, 25); //Top Middle Lower Stretch
+    res[24] = PosPair(6, 28); //Top Index Lower Ring
+    res[25] = PosPair(6, 27); //Top Index Lower Middle
+    res[26] = PosPair(5, 28); //Top Strech Lower Ring
+    res[27] = PosPair(5, 27); //Top Stretch Lower Middle
 
     res
 }
