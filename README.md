@@ -3,7 +3,7 @@
 ## Building with cargo
 To use the analyzer, clone the repo and make sure you have rust nightly installed. If you have, skip the next step.
 
-To install rust, visit [the official installation page](https://www.rust-lang.org/learn/get-started) and follow the instructions there. When installing, make sure you add rust to PATH. Once you have installed, you may need to restart in order for the command to be recognised. After restarting, you can try running `rustup install nightly-2023-06-28` and `rustup default nightly-2023-06-28` to make sure the compiler can use all unstable features.
+To install rust, visit [the official installation page](https://www.rust-lang.org/learn/get-started) and follow the instructions there. When installing, make sure you add rust to PATH. Once you have installed, you may need to restart in order for the command to be recognised. After restarting, you can try running `rustup install stable` and `rustup default stable` to make sure the compiler can use all unstable features.
 
 Once you have done this, you can open a terminal in the folder you cloned into, and run `cargo run --release`. This will build and run the project. For future uses you can use this command again, or `cargo install --path ./` from within the root folder of the project, which makes it runnable from anywhere as `oxeylyzer`!
 
